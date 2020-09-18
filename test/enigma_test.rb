@@ -106,4 +106,9 @@ class EnigmaTest < Minitest::Test
     assert_equal Date.today.strftime("%d%m%y"), @enigma.decrypt("message", "02715")[:date]
   end
 
+  def test_get_decryption_string
+    keys = @enigma.generate_keys("02715")
+    offsets = @enigma.generate_offsets("040895")
+    assert_equal "hello world", @enigma.get_decryption_string("keder ohulw", keys, offsets)
+  end
 end
