@@ -1,3 +1,5 @@
+require 'date'
+
 class Enigma
   attr_reader :character_set
 
@@ -5,8 +7,8 @@ class Enigma
     @character_set = ("a".."z").to_a << " "
   end
 
-  def encrypt(message, key, date)
-
+  def encrypt(message, key = generate_random_key_number(), date = Date.today.strftime("%d%m%y"))
+    
   end
 
   def decrypt(ciphertext, key, date)
