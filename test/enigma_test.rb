@@ -78,10 +78,10 @@ class EnigmaTest < Minitest::Test
     assert_equal "keder ohulw!", @enigma.encrypt("hello world!", "02715", "040895")[:encryption]
   end
 
-  def test_get_encryption_string
+  def test_get_encrypted_string
     keys = @enigma.generate_keys("02715")
     offsets = @enigma.generate_offsets("040895")
-    assert_equal "keder ohulw", @enigma.get_encryption_string("hello world", keys, offsets)
+    assert_equal "keder ohulw", @enigma.get_encrypted_string("hello world", keys, offsets)
   end
 
   def test_find_encrypted_letters
@@ -90,4 +90,31 @@ class EnigmaTest < Minitest::Test
     assert_equal ['k', 'e', 'd', 'e'], @enigma.find_encrypted_letters(four_letter_arr, shifts)
   end
 
+  def test_get_decryption_hash
+    expected =    {
+                    decryption: "hello world",
+                    key: "02715",
+                    date: "040895"
+                  }
+
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+  end
+
+  def test_get_decryption_key_and_date
+    assert_equal "02715", @enigma.decrypt("message", "02715", "040895")[:key]
+    assert_equal "040895", @enigma.decrypt("message", "02715", "040895")[:date]
+    assert_equal Date.today.strftime("%d%m%y"), @enigma.decrypt("message", "02715")[:date]
+  end
+
+  def test_get_decrypted_string
+    keys = @enigma.generate_keys("02715")
+    offsets = @enigma.generate_offsets("040895")
+    assert_equal "hello world", @enigma.get_decrypted_string("keder ohulw", keys, offsets)
+  end
+
+  def test_find_decrypted_letters
+    four_letter_arr = ['k', 'e', 'd', 'e']
+    shifts = { a: 3, b: 27, c: 73, d: 20 }
+    assert_equal ['h', 'e', 'l', 'l'], @enigma.find_decrypted_letters(four_letter_arr, shifts)
+  end
 end
