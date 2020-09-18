@@ -13,4 +13,8 @@ class Enigma
 
   end
 
+  def generate_random_key_number
+    ("00000".."99999").to_a.sample
+  end
+
 end
