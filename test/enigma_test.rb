@@ -1,5 +1,6 @@
 require './test/test_helper'
 require './lib/enigma'
+require 'date'
 
 class EnigmaTest < Minitest::Test
 
@@ -24,8 +25,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_get_keys
-    @enigma.stubs(:generate_random_key_number).returns("03489")
-
     expected = {
                 a: "03",
                 b: "34",
@@ -33,7 +32,7 @@ class EnigmaTest < Minitest::Test
                 d: "89"
                }
 
-    assert_equal expected, @enigma.generate_keys
+    assert_equal expected, @enigma.generate_keys("03489")
   end
 
   def test_get_offsets
@@ -48,9 +47,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_get_shifts
-    @enigma.stubs(:generate_random_key_number).returns("02715")
-
-    keys = @enigma.generate_keys
+    keys = @enigma.generate_keys("02715")
     offsets = @enigma.generate_offsets("040895")
 
     expected = {
@@ -61,6 +58,36 @@ class EnigmaTest < Minitest::Test
                }
 
     assert_equal expected, @enigma.generate_shifts(keys, offsets)
+  end
+
+  def test_get_encryption_key_and_date
+    assert_equal "02715", @enigma.encrypt("message", "02715", "040895")[:key]
+    assert_equal "040895", @enigma.encrypt("message", "02715", "040895")[:date]
+    assert_equal Date.today.strftime("%d%m%y"), @enigma.encrypt("message", "02715")[:date]
+  end
+
+  def test_get_encryption_hash
+    expected =    {
+                    encryption: "keder ohulw",
+                    key: "02715",
+                    date: "040895"
+                  }
+
+    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+    assert_equal expected, @enigma.encrypt("HELLO WORLD", "02715", "040895")
+    assert_equal "keder ohulw!", @enigma.encrypt("hello world!", "02715", "040895")[:encryption]
+  end
+
+  def test_get_encryption_string
+    keys = @enigma.generate_keys("02715")
+    offsets = @enigma.generate_offsets("040895")
+    assert_equal "keder ohulw", @enigma.get_encryption_string("hello world", keys, offsets)
+  end
+
+  def test_find_encrypted_letters
+    four_letter_arr = ['h', 'e', 'l', 'l']
+    shifts = { a: 3, b: 27, c: 73, d: 20 }
+    assert_equal ['k', 'e', 'd', 'e'], @enigma.find_encrypted_letters(four_letter_arr, shifts)
   end
 
 end
