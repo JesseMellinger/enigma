@@ -78,7 +78,6 @@ class Enigma
     message.split('').each_slice(4) do |four_letters|
       decrypted_array << find_decrypted_letters(four_letters, shifts)
     end
-    require 'pry'; binding.pry
     decrypted_array.flatten.join
   end
 
