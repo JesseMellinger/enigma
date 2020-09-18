@@ -1,5 +1,6 @@
 require './test/test_helper'
 require './lib/enigma'
+require 'date'
 
 class EnigmaTest < Minitest::Test
 
@@ -62,10 +63,10 @@ class EnigmaTest < Minitest::Test
   def test_get_encryption_key_and_date
     assert_equal "02715", @enigma.encrypt("message", "02715", "040895")[:key]
     assert_equal "040895", @enigma.encrypt("message", "02715", "040895")[:date]
-    assert_equal "170920", @enigma.encrypt("message", "02715")[:date]
+    assert_equal Date.today.strftime("%d%m%y"), @enigma.encrypt("message", "02715")[:date]
   end
 
-  def test_encrypt
+  def test_get_encryption_hash
     expected =    {
                     encryption: "keder ohulw",
                     key: "02715",
@@ -73,6 +74,8 @@ class EnigmaTest < Minitest::Test
                   }
 
     assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+    assert_equal expected, @enigma.encrypt("HELLO WORLD", "02715", "040895")
+    assert_equal "keder ohulw!", @enigma.encrypt("hello world!", "02715", "040895")[:encryption]
   end
 
 end

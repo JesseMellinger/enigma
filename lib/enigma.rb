@@ -9,7 +9,7 @@ class Enigma
 
   def encrypt(message, key = generate_random_key_number(), date = Date.today.strftime("%d%m%y"))
     {
-      encryption: do_the_encryption(message.downcase, generate_keys(key), generate_offsets(date)),
+      encryption: get_encryption_string(message.downcase, generate_keys(key), generate_offsets(date)),
       key: key,
       date: date
     }
@@ -52,7 +52,7 @@ class Enigma
     }
   end
 
-  def do_the_encryption(message, keys, offsets)
+  def get_encryption_string(message, keys, offsets)
     shifts = generate_shifts(keys, offsets)
     encrypted_array = []
     message.split('').each_slice(4) do |four_letters|
@@ -63,7 +63,7 @@ class Enigma
 
   def find_encrypted_letters(four_letter_arr, shifts)
     four_letter_arr.zip(shifts.values).map do |letter, shift_value|
-      next if !@character_set.include?(letter)
+      next letter if !@character_set.include?(letter)
       @character_set.rotate(@character_set.index(letter) + shift_value).first
     end
   end
