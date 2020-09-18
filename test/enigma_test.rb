@@ -47,4 +47,20 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.generate_offsets("040895")
   end
 
+  def test_get_shifts
+    @enigma.stubs(:generate_random_key_number).returns("02715")
+
+    keys = @enigma.generate_keys
+    offsets = @enigma.generate_offsets("040895")
+
+    expected = {
+                a: 3,
+                b: 27,
+                c: 73,
+                d: 20
+               }
+
+    assert_equal expected, @enigma.generate_shifts(keys, offsets)
+  end
+
 end

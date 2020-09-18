@@ -39,4 +39,13 @@ class Enigma
     }
   end
 
+  def generate_shifts(keys, offsets)
+    {
+      a: keys[:a].to_i + offsets[:a].to_i,
+      b: keys[:b].to_i + offsets[:b].to_i,
+      c: keys[:c].to_i + offsets[:c].to_i,
+      d: keys[:d].to_i + offsets[:d].to_i
+    }
+  end
+
 end
