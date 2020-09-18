@@ -24,8 +24,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_get_keys
-    @enigma.stubs(:generate_random_key_number).returns("03489")
-
     expected = {
                 a: "03",
                 b: "34",
@@ -33,7 +31,7 @@ class EnigmaTest < Minitest::Test
                 d: "89"
                }
 
-    assert_equal expected, @enigma.generate_keys
+    assert_equal expected, @enigma.generate_keys("03489")
   end
 
   def test_get_offsets
@@ -48,9 +46,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_get_shifts
-    @enigma.stubs(:generate_random_key_number).returns("02715")
-
-    keys = @enigma.generate_keys
+    keys = @enigma.generate_keys("02715")
     offsets = @enigma.generate_offsets("040895")
 
     expected = {
@@ -67,6 +63,16 @@ class EnigmaTest < Minitest::Test
     assert_equal "02715", @enigma.encrypt("message", "02715", "040895")[:key]
     assert_equal "040895", @enigma.encrypt("message", "02715", "040895")[:date]
     assert_equal "170920", @enigma.encrypt("message", "02715")[:date]
+  end
+
+  def test_encrypt
+    expected =    {
+                    encryption: "keder ohulw",
+                    key: "02715",
+                    date: "040895"
+                  }
+
+    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
   end
 
 end
