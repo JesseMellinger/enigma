@@ -63,4 +63,10 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.generate_shifts(keys, offsets)
   end
 
+  def test_get_encryption_key_and_date
+    assert_equal "02715", @enigma.encrypt("message", "02715", "040895")[:key]
+    assert_equal "040895", @enigma.encrypt("message", "02715", "040895")[:date]
+    assert_equal "170920", @enigma.encrypt("message", "02715")[:date]
+  end
+
 end

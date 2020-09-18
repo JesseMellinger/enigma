@@ -8,7 +8,11 @@ class Enigma
   end
 
   def encrypt(message, key = generate_random_key_number(), date = Date.today.strftime("%d%m%y"))
-    
+    {
+      encryption: message,
+      key: key,
+      date: date
+    }
   end
 
   def decrypt(ciphertext, key, date)
