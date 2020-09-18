@@ -15,8 +15,12 @@ class Enigma
     }
   end
 
-  def decrypt(ciphertext, key, date)
-
+  def decrypt(ciphertext, key, date = Date.today.strftime("%d%m%y"))
+    {
+    decryption: get_decryption_string(ciphertext.downcase, generate_keys(key), generate_offsets(date)),
+    key: key,
+    date: date
+    }
   end
 
   def generate_random_key_number
@@ -65,6 +69,23 @@ class Enigma
     four_letter_arr.zip(shifts.values).map do |letter, shift_value|
       next letter if !@character_set.include?(letter)
       @character_set.rotate(@character_set.index(letter) + shift_value).first
+    end
+  end
+
+  def get_decryption_string(message, keys, offsets)
+    shifts = generate_shifts(keys, offsets)
+    decrypted_array = []
+    message.split('').each_slice(4) do |four_letters|
+      decrypted_array << find_decrypted_letters(four_letters, shifts)
+    end
+    require 'pry'; binding.pry
+    decrypted_array.flatten.join
+  end
+
+  def find_decrypted_letters(four_letter_arr, shifts)
+    four_letter_arr.zip(shifts.values).map do |letter, shift_value|
+      next letter if !@character_set.include?(letter)
+      @character_set.rotate(@character_set.index(letter) - shift_value).first
     end
   end
 
