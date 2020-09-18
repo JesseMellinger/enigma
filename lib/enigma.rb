@@ -18,13 +18,24 @@ class Enigma
   end
 
   def generate_keys
-    number = generate_random_key_number()
+    num = generate_random_key_number()
 
     {
-      a: number[0..1],
-      b: number[1..2],
-      c: number[2..3],
-      d: number[3..5]
+      a: num[0..1],
+      b: num[1..2],
+      c: num[2..3],
+      d: num[3..5]
+    }
+  end
+
+  def generate_offsets(date)
+    num = (date.to_i ** 2).to_s[-4..-1]
+
+    {
+      a: num[0],
+      b: num[1],
+      c: num[2],
+      d: num[3]
     }
   end
 
