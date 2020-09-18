@@ -20,7 +20,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_get_random_five_digit_string
-    ("00000".."99999").to_a.include? (@enigma.generate_random_key_number)
+    assert ("00000".."99999").to_a.include? (@enigma.generate_random_key_number)
   end
 
   def test_get_keys
@@ -34,6 +34,17 @@ class EnigmaTest < Minitest::Test
                }
 
     assert_equal expected, @enigma.generate_keys
+  end
+
+  def test_get_offsets
+    expected = {
+                a: "1",
+                b: "0",
+                c: "2",
+                d: "5"
+               }
+
+    assert_equal expected, @enigma.generate_offsets("040895")
   end
 
 end
