@@ -17,4 +17,15 @@ class Enigma
     ("00000".."99999").to_a.sample
   end
 
+  def generate_keys
+    number = generate_random_key_number()
+
+    key_hash = {
+                a: number[0..1],
+                b: number[1..2],
+                c: number[2..3],
+                d: number[3..5]
+               }
+  end
+
 end
