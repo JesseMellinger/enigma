@@ -9,7 +9,7 @@ class Enigma
 
   def encrypt(message, key = generate_random_key_number(), date = Date.today.strftime("%d%m%y"))
     {
-      encryption: get_encryption_string(message.downcase, generate_keys(key), generate_offsets(date)),
+      encryption: get_encrypted_string(message.downcase, generate_keys(key), generate_offsets(date)),
       key: key,
       date: date
     }
@@ -17,7 +17,7 @@ class Enigma
 
   def decrypt(ciphertext, key, date = Date.today.strftime("%d%m%y"))
     {
-    decryption: get_decryption_string(ciphertext.downcase, generate_keys(key), generate_offsets(date)),
+    decryption: get_decrypted_string(ciphertext.downcase, generate_keys(key), generate_offsets(date)),
     key: key,
     date: date
     }
@@ -56,7 +56,7 @@ class Enigma
     }
   end
 
-  def get_encryption_string(message, keys, offsets)
+  def get_encrypted_string(message, keys, offsets)
     shifts = generate_shifts(keys, offsets)
     encrypted_array = []
     message.split('').each_slice(4) do |four_letters|
@@ -72,7 +72,7 @@ class Enigma
     end
   end
 
-  def get_decryption_string(message, keys, offsets)
+  def get_decrypted_string(message, keys, offsets)
     shifts = generate_shifts(keys, offsets)
     decrypted_array = []
     message.split('').each_slice(4) do |four_letters|
