@@ -34,12 +34,6 @@ class EnigmaTest < Minitest::Test
     assert_equal "keder ohulw!", @enigma.encrypt("hello world!", "02715", "040895")[:encryption]
   end
 
-  def test_find_encrypted_characters
-    four_letter_arr = ['h', 'e', 'l', 'l']
-    shifts = { a: 3, b: 27, c: 73, d: 20 }
-    assert_equal ['k', 'e', 'd', 'e'], @enigma.find_encrypted_letters(four_letter_arr, shifts)
-  end
-
   def test_get_decryption_hash
     expected =    {
                     decryption: "hello world",

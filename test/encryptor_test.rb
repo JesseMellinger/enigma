@@ -60,4 +60,10 @@ class EncryptorTest < Minitest::Test
     assert_equal "keder ohulw!", @encryptor.get_encrypted_string("hello world!", "02715", "040895")
   end
 
+  def test_find_encrypted_letters
+    four_letter_arr = ['h', 'e', 'l', 'l']
+    shifts = { a: 3, b: 27, c: 73, d: 20 }
+    assert_equal ['k', 'e', 'd', 'e'], @encryptor.find_encrypted_letters(four_letter_arr, shifts)
+  end
+
 end
