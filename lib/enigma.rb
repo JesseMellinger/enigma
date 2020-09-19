@@ -7,6 +7,7 @@ class Enigma
 
   def initialize()
     @encryptor = Encryptor.new()
+    @decryptor = Decryptor.new()
   end
 
   def encrypt(message, key = generate_random_key_number(), date = Date.today.strftime("%d%m%y"))
