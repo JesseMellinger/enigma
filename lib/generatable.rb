@@ -1,9 +1,5 @@
 module Generatable
 
-  def generate_random_key_number
-    ("00000".."99999").to_a.sample
-  end
-
   def generate_keys(random_num)
     {
       a: random_num[0..1],

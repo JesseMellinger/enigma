@@ -1,10 +1,8 @@
 require 'date'
-require './lib/generatable'
 require './lib/encryptor'
 require './lib/decryptor'
 
 class Enigma
-  include Generatable
   attr_reader :character_set
 
   def initialize()
@@ -26,6 +24,10 @@ class Enigma
     key: key,
     date: date
     }
+  end
+
+  def generate_random_key_number
+    ("00000".."99999").to_a.sample
   end
 
 end
