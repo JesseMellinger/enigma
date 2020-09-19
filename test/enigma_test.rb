@@ -16,31 +16,6 @@ class EnigmaTest < Minitest::Test
     assert ("00000".."99999").to_a.include? (@enigma.generate_random_key_number)
   end
 
-  def test_get_offsets
-    expected = {
-                a: "1",
-                b: "0",
-                c: "2",
-                d: "5"
-               }
-
-    assert_equal expected, @enigma.generate_offsets("040895")
-  end
-
-  def test_get_shifts
-    keys = @enigma.generate_keys("02715")
-    offsets = @enigma.generate_offsets("040895")
-
-    expected = {
-                a: 3,
-                b: 27,
-                c: 73,
-                d: 20
-               }
-
-    assert_equal expected, @enigma.generate_shifts(keys, offsets)
-  end
-
   def test_get_encryption_key_and_date
     assert_equal "02715", @enigma.encrypt("message", "02715", "040895")[:key]
     assert_equal "040895", @enigma.encrypt("message", "02715", "040895")[:date]
