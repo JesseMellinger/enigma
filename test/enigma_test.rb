@@ -13,7 +13,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_get_random_five_digit_string
-    assert ("00000".."99999").to_a.include? (@enigma.generate_random_key_number)
+    assert_includes ("00000".."99999").to_a, @enigma.generate_random_key_number
   end
 
   def test_get_encryption_hash
