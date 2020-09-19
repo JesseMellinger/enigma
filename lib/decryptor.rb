@@ -6,7 +6,7 @@ class Decryptor
   end
 
   def get_decrypted_string(message, keys, offsets)
-    shifts = generate_shifts(keys, offsets)
+    shifts = generate_shifts(generate_keys(key), generate_offsets(date))
     decrypted_array = []
     message.split('').each_slice(4) do |four_chars|
       decrypted_array << find_decrypted_letters(four_chars, shifts)

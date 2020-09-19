@@ -20,8 +20,7 @@ class Enigma
 
   def decrypt(ciphertext, key, date = Date.today.strftime("%d%m%y"))
     {
-    decryption: get_decrypted_string(ciphertext.downcase, generate_keys(key),
-                generate_offsets(date)),
+    decryption: @decryptor.get_decrypted_string(ciphertext.downcase, key, date),
     key: key,
     date: date
     }
