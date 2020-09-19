@@ -7,7 +7,7 @@ class Decryptor
     @character_set = ("a".."z").to_a << " "
   end
 
-  def get_decrypted_string(message, keys, offsets)
+  def get_decrypted_string(message, key, date)
     shifts = generate_shifts(generate_keys(key), generate_offsets(date))
     decrypted_array = []
     message.split('').each_slice(4) do |four_chars|
