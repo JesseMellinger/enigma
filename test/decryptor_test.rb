@@ -55,4 +55,10 @@ class DecryptorTest < Minitest::Test
     assert_equal expected, @decryptor.generate_shifts(keys, offsets)
   end
 
+  def test_get_decrypted_string
+    assert_equal "hello world", @decryptor.get_decrypted_string("keder ohulw", "02715", "040895")
+    assert_equal "hello world!", @decryptor.get_decrypted_string("keder ohulw!", "02715", "040895")
+
+  end
+
 end
