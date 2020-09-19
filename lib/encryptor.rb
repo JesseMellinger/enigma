@@ -1,3 +1,5 @@
+require './lib/generatable'
+
 class Encryptor
   include Generatable
 

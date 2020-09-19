@@ -1,3 +1,5 @@
+require './lib/generatable'
+
 class Decryptor
   include Generatable
 

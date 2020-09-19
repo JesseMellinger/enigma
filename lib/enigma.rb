@@ -1,5 +1,7 @@
 require 'date'
 require './lib/generatable'
+require './lib/encryptor'
+require './lib/decryptor'
 
 class Enigma
   include Generatable
