@@ -30,4 +30,15 @@ class EncryptorTest < Minitest::Test
     assert_equal expected, @encryptor.generate_keys("03489")
   end
 
+  def test_get_offsets
+    expected = {
+                a: "1",
+                b: "0",
+                c: "2",
+                d: "5"
+               }
+
+    assert_equal expected, @encryptor.generate_offsets("040895")
+  end
+
 end
