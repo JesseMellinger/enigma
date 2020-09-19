@@ -59,32 +59,32 @@ class Enigma
   def get_encrypted_string(message, keys, offsets)
     shifts = generate_shifts(keys, offsets)
     encrypted_array = []
-    message.split('').each_slice(4) do |four_letters|
-      encrypted_array << find_encrypted_letters(four_letters, shifts)
+    message.split('').each_slice(4) do |four_chars|
+      encrypted_array << find_encrypted_letters(four_chars, shifts)
     end
     encrypted_array.flatten.join
   end
 
-  def find_encrypted_letters(four_letter_arr, shifts)
-    four_letter_arr.zip(shifts.values).map do |letter, shift_value|
-      next letter if !@character_set.include?(letter)
-      @character_set.rotate(@character_set.index(letter) + shift_value).first
+  def find_encrypted_letters(four_char_arr, shifts)
+    four_char_arr.zip(shifts.values).map do |char, shift_value|
+      next char if !@character_set.include?(char)
+      @character_set.rotate(@character_set.index(char) + shift_value).first
     end
   end
 
   def get_decrypted_string(message, keys, offsets)
     shifts = generate_shifts(keys, offsets)
     decrypted_array = []
-    message.split('').each_slice(4) do |four_letters|
-      decrypted_array << find_decrypted_letters(four_letters, shifts)
+    message.split('').each_slice(4) do |four_chars|
+      decrypted_array << find_decrypted_letters(four_chars, shifts)
     end
     decrypted_array.flatten.join
   end
 
-  def find_decrypted_letters(four_letter_arr, shifts)
-    four_letter_arr.zip(shifts.values).map do |letter, shift_value|
-      next letter if !@character_set.include?(letter)
-      @character_set.rotate(@character_set.index(letter) - shift_value).first
+  def find_decrypted_letters(four_char_arr, shifts)
+    four_char_arr.zip(shifts.values).map do |char, shift_value|
+      next char if !@character_set.include?(char)
+      @character_set.rotate(@character_set.index(char) - shift_value).first
     end
   end
 
