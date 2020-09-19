@@ -41,4 +41,18 @@ class DecryptorTest < Minitest::Test
     assert_equal expected, @decryptor.generate_offsets("040895")
   end
 
+  def test_get_shifts
+    keys = @decryptor.generate_keys("02715")
+    offsets = @decryptor.generate_offsets("040895")
+
+    expected = {
+                a: 3,
+                b: 27,
+                c: 73,
+                d: 20
+               }
+
+    assert_equal expected, @decryptor.generate_shifts(keys, offsets)
+  end
+
 end
