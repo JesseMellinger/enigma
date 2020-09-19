@@ -2,6 +2,7 @@ require './lib/generatable'
 
 class Decryptor
   include Generatable
+  attr_reader :character_set
 
   def initialize()
     @character_set = ("a".."z").to_a << " "
