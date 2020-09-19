@@ -34,12 +34,6 @@ class EnigmaTest < Minitest::Test
     assert_equal "keder ohulw!", @enigma.encrypt("hello world!", "02715", "040895")[:encryption]
   end
 
-  def test_get_encrypted_string
-    keys = @enigma.generate_keys("02715")
-    offsets = @enigma.generate_offsets("040895")
-    assert_equal "keder ohulw", @enigma.get_encrypted_string("hello world", keys, offsets)
-  end
-
   def test_find_encrypted_characters
     four_letter_arr = ['h', 'e', 'l', 'l']
     shifts = { a: 3, b: 27, c: 73, d: 20 }

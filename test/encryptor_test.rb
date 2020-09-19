@@ -55,4 +55,9 @@ class EncryptorTest < Minitest::Test
     assert_equal expected, @encryptor.generate_shifts(keys, offsets)
   end
 
+  def test_get_encrypted_string
+    assert_equal "keder ohulw", @encryptor.get_encrypted_string("hello world", "02715", "040895")
+    assert_equal "keder ohulw!", @encryptor.get_encrypted_string("hello world!", "02715", "040895")
+  end
+
 end
