@@ -19,4 +19,15 @@ class DecryptorTest < Minitest::Test
     assert_equal expected, @decryptor.character_set
   end
 
+  def test_get_keys
+    expected = {
+                a: "03",
+                b: "34",
+                c: "48",
+                d: "89"
+               }
+
+    assert_equal expected, @decryptor.generate_keys("03489")
+  end
+
 end
