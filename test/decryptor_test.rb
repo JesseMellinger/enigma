@@ -58,7 +58,12 @@ class DecryptorTest < Minitest::Test
   def test_get_decrypted_string
     assert_equal "hello world", @decryptor.get_decrypted_string("keder ohulw", "02715", "040895")
     assert_equal "hello world!", @decryptor.get_decrypted_string("keder ohulw!", "02715", "040895")
+  end
 
+  def test_find_decrypted_letters
+    four_letter_arr = ['k', 'e', 'd', 'e']
+    shifts = { a: 3, b: 27, c: 73, d: 20 }
+    assert_equal ['h', 'e', 'l', 'l'], @decryptor.find_decrypted_letters(four_letter_arr, shifts)
   end
 
 end
