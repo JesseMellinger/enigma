@@ -30,4 +30,13 @@ class Enigma
     ("00000".."99999").to_a.sample
   end
 
+  def crack(ciphertext, date = Date.today.strftime("%d%m%y"))
+      {
+        ecryption: @decryptor.get_decrypted_string_without_key(ciphertext.downcase),
+        date: date,
+        key: date
+        # find_key([:encryption], date)
+      }
+  end
+
 end
