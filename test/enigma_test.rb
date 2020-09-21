@@ -68,7 +68,7 @@ class EnigmaTest < Minitest::Test
                   key: "08304"
                  }
 
-    assert_equal expected, @enigma.crack("vkopbfzsergdstg")
+    assert_equal expected, @enigma.crack(ciphertext)
   end
 
 end
