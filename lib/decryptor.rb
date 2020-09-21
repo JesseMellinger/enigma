@@ -26,18 +26,39 @@ class Decryptor
 
   #Iteration 4
 
-  def find_key(date)
-    
+  def find_shift(decrypted_text, ciphertext)
+    shifts = decrypted_text[0..3].split('').zip(ciphertext[0..3].split('')).map do |two_char_arr|
+      @character_set.index(two_char_arr[1]) - @character_set.index(two_char_arr[0])
+    end
+    get_positive_value_shifts(shifts)
   end
 
-  def find_shift_value(last_four)
+  def get_positive_value_shifts(shift_arr)
+    shift_arr.map do |num|
+      next num if num >= 0
+      num + 27
+    end
+  end
+
+  def find_key(decyphered_text, ciphertext, date)
+    offsets = generate_offsets(date)
+    shifts = get_shift_hash(find_shift(decyphered_text, ciphertext))
+    ("00000".."99999").to_a.find do |num|
+      num[0..1].to_i % 27 == shifts[:a] - offsets[:a].to_i &&
+      num[1..2].to_i % 27 == shifts [:b] - offsets[:b].to_i &&
+      num[2..3].to_i % 27 == shifts[:c] - offsets[:c].to_i &&
+      num[3..4].to_i % 27 == shifts[:d] - offsets[:d].to_i
+    end
+  end
+
+  def find_shift_with_last_four_characters(last_four)
     last_four.split('').zip(['d', 'n', 'e', ' ']).map do |two_char_arr|
-      @character_set.index(two_char_arr[0]) - @character_set.index(two_char_arr[1])
+      @character_set.index(two_char_arr[0]) - @character_set.index(two_char_arr[1]) + 27
     end
   end
 
   def get_decrypted_string_without_key(ciphertext)
-    shifts = get_shift_hash(find_shift_value(ciphertext.reverse[0..3]))
+    shifts = get_shift_hash(find_shift_with_last_four_characters(ciphertext.reverse[0..3]))
     decrypted_array = []
     ciphertext.reverse.split('').each_slice(4) do |four_chars|
       decrypted_array << find_decrypted_letters(four_chars, shifts)

@@ -31,11 +31,11 @@ class Enigma
   end
 
   def crack(ciphertext, date = Date.today.strftime("%d%m%y"))
+    decyphered_text = @decryptor.get_decrypted_string_without_key(ciphertext.downcase)
       {
-        ecryption: @decryptor.get_decrypted_string_without_key(ciphertext.downcase),
+        decryption: decyphered_text,
         date: date,
-        key: date
-        # find_key([:encryption], date)
+        key: @decryptor.find_key(decyphered_text,ciphertext.downcase, date)
       }
   end
 
