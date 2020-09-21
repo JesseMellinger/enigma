@@ -66,4 +66,10 @@ class DecryptorTest < Minitest::Test
     assert_equal ['h', 'e', 'l', 'l'], @decryptor.find_decrypted_letters(four_letter_arr, shifts)
   end
 
+  def test_find_shift_between_encrypted_and_decrypted_text
+    decrypted_text = "hello world end"
+    encrypted_text = "vjqtbeaweqihssi"
+    assert_equal [14, 5, 5, 8], @decryptor.find_shift(decrypted_text, encrypted_text)
+  end
+
 end
