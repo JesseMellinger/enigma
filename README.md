@@ -41,7 +41,11 @@ Please make sure to update tests as appropriate.
 ## Self-Assessment
 
 Functionality: 4
+
 OOP: 4
+
 Ruby Conventions and Mechanics: 4
+
 TDD: 3
+
 Version Control: 4
