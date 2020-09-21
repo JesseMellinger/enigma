@@ -50,7 +50,7 @@ class EnigmaTest < Minitest::Test
     assert_equal Date.today.strftime("%d%m%y"), @enigma.decrypt("message", "02715")[:date]
   end
 
-  def test_get_crack_hash
+  def test_get_crack_hash_with_date_provided
     expected =   {
                   decryption: "hello world end",
                   date: "291018",
@@ -58,6 +58,17 @@ class EnigmaTest < Minitest::Test
                  }
 
     assert_equal expected, @enigma.crack("vjqtbeaweqihssi", "291018")
+  end
+
+  def test_get_crack_hash_without_date_provided
+    ciphertext = @enigma.encrypt("hello world end", "08304")[:encryption]
+    expected =   {
+                  decryption: "hello world end",
+                  date: Date.today.strftime("%d%m%y"),
+                  key: "08304"
+                 }
+
+    assert_equal expected, @enigma.crack("vkopbfzsergdstg")
   end
 
 end
