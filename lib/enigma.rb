@@ -35,7 +35,7 @@ class Enigma
       {
         decryption: decyphered_text,
         date: date,
-        key: @decryptor.find_key(decyphered_text,ciphertext.downcase, date)
+        key: @decryptor.find_key(decyphered_text, ciphertext.downcase, date)
       }
   end
 

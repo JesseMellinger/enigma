@@ -83,4 +83,15 @@ class DecryptorTest < Minitest::Test
     assert_equal "08304", @decryptor.find_key(decrypted_text, encrypted_text, date)
   end
 
+  def test_finding_shift_based_off_of_last_four_chars
+    assert_equal [32, 32, 41, 8], @decryptor.find_shift_with_last_four_characters('issh')
+  end
+
+  def test_get_decrypted_string_without_key
+    encrypted_text = "vjqtbeaweqihssi"
+    decrypted_text = "hello world end"
+
+    assert_equal decrypted_text, @decryptor.get_decrypted_string_without_key(encrypted_text)
+  end
+
 end
