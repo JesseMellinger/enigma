@@ -30,10 +30,10 @@ class Decryptor
     shifts = decrypted_text[0..3].split('').zip(ciphertext[0..3].split('')).map do |two_char_arr|
       @character_set.index(two_char_arr[1]) - @character_set.index(two_char_arr[0])
     end
-    get_positive_value_shifts(shifts)
+    get_positive_shift_values(shifts)
   end
 
-  def get_positive_value_shifts(shift_arr)
+  def get_positive_shift_values(shift_arr)
     shift_arr.map do |num|
       next num if num >= 0
       num + 27

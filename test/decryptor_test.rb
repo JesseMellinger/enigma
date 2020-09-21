@@ -72,4 +72,8 @@ class DecryptorTest < Minitest::Test
     assert_equal [14, 5, 5, 8], @decryptor.find_shift(decrypted_text, encrypted_text)
   end
 
+  def test_get_positive_shift_values
+    assert_equal [14, 5, 5, 8], @decryptor.get_positive_shift_values([14, -22, 5, -19])
+  end
+
 end
