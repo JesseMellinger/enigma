@@ -94,4 +94,15 @@ class DecryptorTest < Minitest::Test
     assert_equal decrypted_text, @decryptor.get_decrypted_string_without_key(encrypted_text)
   end
 
+  def test_get_shift_hash
+    expected = {
+                a: 32,
+                b: 32,
+                c: 41,
+                d: 8
+              }
+
+    assert_equal expected, @decryptor.get_shift_hash([32, 32, 41, 8])
+  end
+
 end
