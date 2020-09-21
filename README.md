@@ -37,3 +37,11 @@ Created 'decrypted.txt' with the key 82648 and date 240818
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## Self-Assessment
+
+Functionality: 4
+OOP: 4
+Ruby Conventions and Mechanics: 4
+TDD: 3
+Version Control: 4
