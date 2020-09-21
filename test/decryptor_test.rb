@@ -76,4 +76,11 @@ class DecryptorTest < Minitest::Test
     assert_equal [14, 5, 5, 8], @decryptor.get_positive_shift_values([14, -22, 5, -19])
   end
 
+  def test_finding_key
+    decrypted_text = "hello world end"
+    encrypted_text = "vjqtbeaweqihssi"
+    date = "291018"
+    assert_equal "08304", @decryptor.find_key(decrypted_text, encrypted_text, date)
+  end
+
 end
