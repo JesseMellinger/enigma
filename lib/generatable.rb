@@ -5,7 +5,7 @@ module Generatable
       a: random_num[0..1],
       b: random_num[1..2],
       c: random_num[2..3],
-      d: random_num[3..5]
+      d: random_num[3..4]
     }
   end
 

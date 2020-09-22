@@ -3,7 +3,6 @@ require './lib/encryptor'
 require './lib/decryptor'
 
 class Enigma
-  attr_reader :character_set
 
   def initialize()
     @encryptor = Encryptor.new()
@@ -28,6 +27,15 @@ class Enigma
 
   def generate_random_key_number
     ("00000".."99999").to_a.sample
+  end
+
+  def crack(ciphertext, date = Date.today.strftime("%d%m%y"))
+    decyphered_text = @decryptor.get_decrypted_string_without_key(ciphertext.downcase)
+      {
+        decryption: decyphered_text,
+        date: date,
+        key: @decryptor.find_key(decyphered_text, ciphertext.downcase, date)
+      }
   end
 
 end
