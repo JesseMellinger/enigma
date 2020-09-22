@@ -32,6 +32,18 @@ Again a confirmation message will be printed to the terminal informing the user 
 Created 'decrypted.txt' with the key 82648 and date 240818
 ```
 
+A `crack` method is also available that allows the user to decrypt a message without supplying a key. A date may be given to this method as well and if not, today's date is used by default. Encrypt the message just as before, but instead run the `crack` runner file like so:
+
+```
+ruby ./lib/crack.rb encrypted.txt cracked.txt 240818
+```
+
+The first argument (`encrypted.txt`) is the file containing the encrypted text to be translated. The second argument (`cracked.txt`) is the file to be written to and the six-digit number represents the date given in the form DDMMYY. A confirmation message will be printed to the terminal as before with the key discovered.
+
+```
+Created 'cracked.txt' with the cracked key 82648 and date 240818
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
